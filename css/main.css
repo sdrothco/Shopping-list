@@ -1,0 +1,159 @@
+/* apply a natural box layout model to all elements */
+*, *:before, *:after {
+    -moz-box-sizing: border-box; 
+    -webkit-box-sizing: border-box; 
+    box-sizing: border-box;
+ }
+
+body {
+    width: 960px;   
+    background: url(../images/bg-wood.jpg) no-repeat fixed top center #fff;
+    font-family: helvetica;
+}
+
+header {
+    width: 960px;
+    padding: .5em;
+    margin-bottom: 2em;
+    background: lightgreen;
+}
+h1 {
+    font-size: 3.5em;
+    font-family: 'Wendy One', sans-serif;
+}
+h2 {
+    font-size: 2em;
+}
+
+li {
+    position: relative;
+    padding: .2em 0;
+
+}
+
+form {
+    margin: .3em 0;
+}
+
+.highlighted {
+    background-color: rgba(256,256,256,0.5);
+
+}
+
+.item-controls, .fav-controls {
+    /*display: none;*/
+    position: absolute;
+    right: 0;
+    text-align: right;
+}
+.item-controls a, .fav-controls a {
+    padding: 3px;
+}
+
+.item-controls a:hover, .fav-controls a:hover {
+    background-color: green;
+    border-radius: 5px;
+}
+
+#add-item {
+    font-size: 1em;
+    padding: 3px;
+    width: 50%;
+    height: 30px;
+}
+
+.item-text {
+    padding: 0 3px;
+}
+
+.icon-checkbox-checked, .icon-checkbox-unchecked {
+    display: none;
+}
+
+.shopping-check-list > .checked .item-text {
+    text-decoration:line-through
+}
+
+.checked .icon-checkbox-checked {
+    display: inline;
+}
+
+li:not(.checked) .icon-checkbox-unchecked, 
+.select-all:not(.checked) .icon-checkbox-unchecked {
+    display: inline;
+}
+
+
+a:link, a:visited {
+    color: black;
+    text-decoration: none;
+
+/*border: 1px solid red;*/
+}
+
+.edit-item {
+   display:none; 
+}
+
+
+
+
+/*.shopping-check-list {
+    columns: 2;
+    -webkit-columns: 2;
+    -moz-columns: 2;
+}*/
+
+/*.shopping-check-list  {
+    -moz-column-count: 2;
+    -moz-column-gap: 20px;
+    -webkit-column-count: 2;
+    -webkit-column-gap: 20px;
+    column-count: 2;
+    column-gap: 20px;
+}
+*/
+
+.container {
+    width: 960px;
+
+    overflow: hidden;
+    border: 0;
+    /*margin-bottom: 10px;    */
+}
+.column {
+    position: relative;
+    float: left;
+    margin-right: 1%;
+    padding: 10px;
+}
+
+.last {
+    margin-right: 0 !important;
+}
+
+.put-at-bottom {
+    position: absolute;
+    bottom: 0;
+}
+
+.tall {
+    height: 400px;
+}
+
+.column-33 {
+    width: 33%;   
+}
+
+.column-50 {
+    width: 49.5%;
+}
+
+.column-66 {
+    width: 66%;
+}
+
+.column-100 {
+    margin-right: 0 !important;
+    width: 100%;
+}

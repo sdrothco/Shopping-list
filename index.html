@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Grocery Time</title>
+	<link rel="stylesheet" href="css/reset.css" type="text/css">
+	<link rel="stylesheet" href="css/main.css" type="text/css">
+	<link rel="stylesheet" href="css/style.css" type="text/css">
+	<link href='http://fonts.googleapis.com/css?family=Wendy+One' rel='stylesheet' type='text/css'>
+	<script src="http://code.jquery.com/jquery.min.js"></script>
+	<script src="js/app.js"></script>
+</head>
+<body>
+<header>
+	<!-- <div class='header-image'>
+		<span data-icon="&#xe603;" class="icon-cart3"></span>
+		<span data-icon="&#xe60c;" class="icon-clock"></span>
+	</div> -->
+	<h1><span data-icon="&#xe601;" class="icon-cart"></span>
+		<span data-icon="&#xe60c;" class="icon-clock"></span> Grocery Time</h1>
+</header>
+
+<div class="container">
+<h2 class="column column-66">
+	<span data-icon="&#xe601;" class="icon-cart"></span> Shopping List</h2>
+<h2 class="column column-33 last"><span data-icon="&#xe606;" class="icon-star2"></span> My Favorites</h2>
+</div>
+
+<div class="container">
+	<section class="shopping-list column column-66 tall">
+		<form id="add-item-form" name="add-item-form" action="">
+			<!-- todo add favorite button -->
+			<input type="text" placeholder="Add item" id="add-item" maxlength="50"/>
+			<button type="button" class="add-button"><span data-icon="&#xe609;" class="icon-plus"></button>
+		</form>
+
+		<ul class="shopping-check-list">
+			<li class="checked">
+				<a data-icon="&#xe60b;" class="icon-checkbox-unchecked checkbox" href="#"></a>
+				<a data-icon="&#xe60b;" class="icon-checkbox-checked checkbox" href="#"></a>
+				<input class="edit-item" type="text" value="Apples">
+				<span class="item-text">Apples</span>
+				<span class="item-controls">
+					<a href="#" data-icon="&#xe606;" class="icon-star2"></a><a href="#" data-icon="&#xe600;" class="icon-pencil"></a><a href="#" data-icon="&#xe604;" class="icon-remove"></a>
+				</span>
+			</li>
+			<li>
+				<a data-icon="&#xe60b;" class="icon-checkbox-unchecked checkbox" href="#"></a>
+				<a data-icon="&#xe60b;" class="icon-checkbox-checked checkbox" href="#"></a>
+				<input class="edit-item" type="text" value="Oranges1">
+				<span class="item-text">Oranges1</span>
+				<span class="item-controls">
+					<a href="#" data-icon="&#xe606;" class="icon-star2"></a><a href="#" data-icon="&#xe600;" class="icon-pencil"></a><a href="#" data-icon="&#xe604;" class="icon-remove"></a>
+				</span>
+			</li>
+			<li>
+				<a data-icon="&#xe60b;" class="icon-checkbox-unchecked checkbox" href="#"></a>
+				<a data-icon="&#xe60b;" class="icon-checkbox-checked checkbox" href="#"></a>
+				<input class="edit-item" type="text" value="Oranges2">
+				<span class="item-text">Oranges2</span>
+				<span class="item-controls">
+					<a href="#" data-icon="&#xe606;" class="icon-star2"></a><a href="#" data-icon="&#xe600;" class="icon-pencil"></a><a href="#" data-icon="&#xe604;" class="icon-remove"></a>
+				</span>
+			</li>
+		</ul>
+
+		<div class="put-at-bottom">
+			<div class="select-all">
+				<a data-icon="&#xe60b;" class="icon-checkbox-unchecked checkbox" href="#"></a>
+				<a data-icon="&#xe60b;" class="icon-checkbox-checked checkbox" href="#"></a>
+				Select all
+			</div>
+			<a class="delete-selected" href="#">Delete Selected</a>
+		</div>
+	</section>
+
+
+	<section class="favorites column column-33 tall last highlighted">
+		<ul class="favorites-check-list">
+			<li class="checked">
+				<a data-icon="&#xe60b;" class="icon-checkbox-unchecked checkbox" href="#"></a>
+				<a data-icon="&#xe60b;" class="icon-checkbox-checked checkbox" href="#"></a>
+				<input class="edit-item" type="text" value="Apples">
+				<span class="item-text">Apples</span>
+				<span class="fav-controls">
+					<a href="#" data-icon="&#xe600;" class="icon-pencil"></a><a href="#" data-icon="&#xe604;" class="icon-remove"></a>
+				</span>
+			</li>
+			<li>
+				<a data-icon="&#xe60b;" class="icon-checkbox-unchecked checkbox" href="#"></a>
+				<a data-icon="&#xe60b;" class="icon-checkbox-checked checkbox" href="#"></a>
+				<input class="edit-item" type="text" value="Milk">
+				<span class="item-text">Milk</span>
+				<span class="fav-controls">
+					<a href="#" data-icon="&#xe600;" class="icon-pencil"></a><a href="#" data-icon="&#xe604;" class="icon-remove"></a>
+				</span>
+			</li>
+			<li>
+				<a data-icon="&#xe60b;" class="icon-checkbox-unchecked checkbox" href="#"></a>
+				<a data-icon="&#xe60b;" class="icon-checkbox-checked checkbox" href="#"></a>
+				<input class="edit-item" type="text" value="Yogurt">
+				<span class="item-text">Yogurt</span>
+				<span class="fav-controls">
+					<a href="#" data-icon="&#xe600;" class="icon-pencil"></a><a href="#" data-icon="&#xe604;" class="icon-remove"></a>
+				</span>
+			</li>
+		</ul>
+		<div class="put-at-bottom">
+			<div class="select-all">
+				<a data-icon="&#xe60b;" class="icon-checkbox-unchecked checkbox" href="#"></a>
+				<a data-icon="&#xe60b;" class="icon-checkbox-checked checkbox" href="#"></a>
+				Select all favorites
+			</div>
+		</div>
+	</section>
+</div>
+
+<div class="container">
+	<h2 class="column column-50">Test 1</h2>
+	<h2 class="column column-50 last">Test 2</h2>
+</div>
+
+<div class="container">
+	<section class="column column-100">
+		footer goes here
+	</section>
+</div>
+	
+</body>
+</html>
