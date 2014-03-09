@@ -12,30 +12,30 @@
 </head>
 <body>
 <header>
-	<!-- <div class='header-image'>
-		<span data-icon="&#xe603;" class="icon-cart3"></span>
-		<span data-icon="&#xe60c;" class="icon-clock"></span>
-	</div> -->
 	<h1><span data-icon="&#xe601;" class="icon-cart"></span>
-		<span data-icon="&#xe60c;" class="icon-clock"></span> Grocery Time</h1>
+		<span data-icon="&#xe60c;" class="icon-clock"></span> Grocery Time
+	</h1>
 </header>
 
 <div class="container">
 <h2 class="column column-66">
-	<span data-icon="&#xe601;" class="icon-cart"></span> Shopping List</h2>
-<h2 class="column column-33 last"><span data-icon="&#xe606;" class="icon-star2"></span> My Favorites</h2>
+	<span data-icon="&#xe601;" class="icon-cart"></span> Shopping List
+</h2>
+<h2 class="column column-33 last">
+	<span data-icon="&#xe606;" class="icon-star2 selected"></span> My Favorites
+</h2>
 </div>
 
 <div class="container">
 	<section class="shopping-list column column-66 tall">
-		<form id="add-item-form" name="add-item-form" action="">
-			<!-- todo add favorite button -->
+		<form id="add-item-form" name="add-item-form">
 			<input type="text" placeholder="Add item" id="add-item" maxlength="50"/>
-			<button type="button" class="add-button"><span data-icon="&#xe609;" class="icon-plus"></button>
+			<a href="#" data-icon="&#xe606;" class="add-favorite-button button icon-star2"></a>
+			<a href="#" data-icon="&#xe609;" class="icon-plus add-button button"></a>
 		</form>
 
 		<ul class="shopping-check-list">
-			<li class="checked">
+			<li class="checked is-favorite">
 				<a data-icon="&#xe60b;" class="icon-checkbox-unchecked checkbox" href="#"></a>
 				<a data-icon="&#xe60b;" class="icon-checkbox-checked checkbox" href="#"></a>
 				<input class="edit-item" type="text" value="Apples">
@@ -65,12 +65,9 @@
 		</ul>
 
 		<div class="put-at-bottom">
-			<div class="select-all">
-				<a data-icon="&#xe60b;" class="icon-checkbox-unchecked checkbox" href="#"></a>
-				<a data-icon="&#xe60b;" class="icon-checkbox-checked checkbox" href="#"></a>
-				Select all
-			</div>
-			<a class="delete-selected" href="#">Delete Selected</a>
+			<a class="select-all-button button" href="#">Select All</a>
+			<a class="deselect-all-button button" href="#">Deselect All</a>
+			<a class="delete-selected-button button" href="#">Delete Selected</a>
 		</div>
 	</section>
 
@@ -106,16 +103,14 @@
 			</li>
 		</ul>
 		<div class="put-at-bottom">
-			<div class="select-all">
-				<a data-icon="&#xe60b;" class="icon-checkbox-unchecked checkbox" href="#"></a>
-				<a data-icon="&#xe60b;" class="icon-checkbox-checked checkbox" href="#"></a>
-				Select all favorites
-			</div>
+			<a class="select-all-button button" href="#">Select All</a>
+			<a class="deselect-all-button button" href="#">Deselect All</a>
+			<a class="delete-selected-button button" href="#">Delete Selected</a>
 		</div>
 	</section>
 </div>
 
-<div class="container">
+<!-- <div class="container">
 	<h2 class="column column-50">Test 1</h2>
 	<h2 class="column column-50 last">Test 2</h2>
 </div>
@@ -124,7 +119,7 @@
 	<section class="column column-100">
 		footer goes here
 	</section>
-</div>
+</div> -->
 	
 </body>
 </html>

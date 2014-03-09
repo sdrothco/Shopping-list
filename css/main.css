@@ -8,18 +8,18 @@
 body {
     width: 960px;   
     background: url(../images/bg-wood.jpg) no-repeat fixed top center #fff;
-    font-family: helvetica;
+    font-family: Helvetica;
 }
 
 header {
     width: 960px;
     padding: .5em;
     margin-bottom: 2em;
-    background: lightgreen;
+    background: #9FF781;
 }
 h1 {
     font-size: 3.5em;
-    font-family: 'Wendy One', sans-serif;
+    font-family: 'Wendy One', Helvetica, sans-serif;
 }
 h2 {
     font-size: 2em;
@@ -37,23 +37,9 @@ form {
 
 .highlighted {
     background-color: rgba(256,256,256,0.5);
-
 }
 
-.item-controls, .fav-controls {
-    /*display: none;*/
-    position: absolute;
-    right: 0;
-    text-align: right;
-}
-.item-controls a, .fav-controls a {
-    padding: 3px;
-}
 
-.item-controls a:hover, .fav-controls a:hover {
-    background-color: green;
-    border-radius: 5px;
-}
 
 #add-item {
     font-size: 1em;
@@ -62,39 +48,147 @@ form {
     height: 30px;
 }
 
-.item-text {
-    padding: 0 3px;
+.edit-item {
+   display:none; 
 }
 
-.icon-checkbox-checked, .icon-checkbox-unchecked {
-    display: none;
+.item-text {
+    padding: 0 3px;
 }
 
 .shopping-check-list > .checked .item-text {
     text-decoration:line-through
 }
 
+/* hide all types of checkboxes initially */
+.icon-checkbox-checked, .icon-checkbox-unchecked {
+    display: none;
+}
+
+/* if it is checked, display the checked box icon */
 .checked .icon-checkbox-checked {
     display: inline;
 }
 
+/* if it is NOT checked, display the UNchecked box icon */
 li:not(.checked) .icon-checkbox-unchecked, 
 .select-all:not(.checked) .icon-checkbox-unchecked {
     display: inline;
 }
 
 
-a:link, a:visited {
+a {
     color: black;
     text-decoration: none;
-
-/*border: 1px solid red;*/
 }
 
-.edit-item {
-   display:none; 
+.item-controls, .fav-controls {
+    position: absolute;
+    right: 0;
+    /*text-align: right;*/
 }
 
+.item-controls a, .fav-controls a {
+    padding: 3px;
+}
+
+.item-controls a:hover, .fav-controls a:hover {
+    /*background-color: #298A08;*/
+    background: #31B404;
+    background: -webkit-linear-gradient(top, #31B404, #298A08);
+    background: -moz-linear-gradient(top, #31B404, #298A08);
+    background: -o-linear-gradient(top, #31B404, #298A08);
+    background: -ms-linear-gradient(top, #31B404, #298A08);
+    background: linear-gradient(top, #31B404, #298A08);
+
+    -webkit-border-radius: 5px;
+    -khtml-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+
+    -webkit-box-shadow: 1px 1px 2px 0 rgba(0, 0, 0, 0.45);
+    -moz-box-shadow: 1px 1px 2px 0 rgba(0, 0, 0, 0.45);
+    box-shadow: 1px 1px 2px 0 rgba(0, 0, 0, 0.45);
+}
+
+.button {
+    padding: 5px;
+    display: inline-block;
+    /*border: 2px solid rgba(33, 68, 72, 0.59);*/
+     
+    color: black;
+    text-align: center;
+    font: bold 1em "Helvetica Neue", Helvetica, Geneva, sans-serif;
+    
+    background: #9FF781;
+    background: -webkit-linear-gradient(top, #9FF781, #31B404);
+    background: -moz-linear-gradient(top, #9FF781, #31B404);
+    background: -o-linear-gradient(top, #9FF781, #31B404);
+    background: -ms-linear-gradient(top, #9FF781, #31B404);
+    background: linear-gradient(top, #9FF781, #31B404);
+     
+    -webkit-border-radius: 5px;
+    -khtml-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+     
+    -webkit-box-shadow: 1px 1px 2px 0 rgba(0, 0, 0, 0.45);
+    -moz-box-shadow: 1px 1px 2px 0 rgba(0, 0, 0, 0.45);
+    box-shadow: 1px 1px 2px 0 rgba(0, 0, 0, 0.45);
+}
+ 
+a.button:hover {
+    background: #31B404;
+    background: -webkit-linear-gradient(top, #31B404, #298A08);
+    background: -moz-linear-gradient(top, #31B404, #298A08);
+    background: -o-linear-gradient(top, #31B404, #298A08);
+    background: -ms-linear-gradient(top, #31B404, #298A08);
+    background: linear-gradient(top, #31B404, #298A08);
+}
+
+.select-all-button {
+    width: 99px;
+    /*padding: 5px 15px;*/
+}
+.deselect-all-button {
+    display: none;
+}
+
+.delete-selected-button {
+    margin-left: 1em;
+}
+
+.add-button {
+    margin-left: .2em;
+}
+
+.add-favorite-button {
+    margin-left: .2em;
+    /*position: absolute;
+    left: 280px;
+    top: 18px;*/
+}
+.add-favorite-button.selected {
+    margin-left: .2em;
+    /*-webkit-box-shadow: 1px 1px 2px 0 rgba(0, 0, 0, 0.45);
+    -moz-box-shadow: 1px 1px 2px 0 rgba(0, 0, 0, 0.45);*/
+    /*box-shadow: inset 1px 1px 0px 0 white, 1px 1px 2px 0 rgba(0, 0, 0, 0.45);*/
+    box-shadow: /*inset -1px -1px 1px rgba(255, 255, 255, 1),*/ inset 1px 1px 1px rgba(0, 0, 0, 0.9);
+
+    background: #31B404;
+    background: -webkit-linear-gradient(bottom, #31B404, #298A08);
+    background: -moz-linear-gradient(bottom, #31B404, #298A08);
+    background: -o-linear-gradient(bottom, #31B404, #298A08);
+    background: -ms-linear-gradient(bottom, #31B404, #298A08);
+    background: linear-gradient(bottom, #31B404, #298A08);
+}
+.icon-star2.selected {
+    color: yellow;
+}
+
+.is-favorite a.icon-star2 {
+    color: yellow;
+}
 
 
 
@@ -113,6 +207,9 @@ a:link, a:visited {
     column-gap: 20px;
 }
 */
+
+
+
 
 .container {
     width: 960px;
@@ -134,11 +231,13 @@ a:link, a:visited {
 
 .put-at-bottom {
     position: absolute;
-    bottom: 0;
+    bottom: 10px;
 }
 
 .tall {
-    height: 400px;
+    min-height: 400px;
+    padding-bottom: 45px;
+
 }
 
 .column-33 {
