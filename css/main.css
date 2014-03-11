@@ -11,10 +11,10 @@ body {
     background: url(../images/bg-wood.jpg) no-repeat fixed top center #fff;
     font-family: Helvetica;
 }
-
-header {
+header, footer {
     width: 960px;
     padding: .5em;
+    margin-top: 2em;
     margin-bottom: 2em;
     background: #9FF781;
 }
@@ -23,18 +23,26 @@ h1 {
     font-family: 'Wendy One', Helvetica, sans-serif;
 }
 h2 {
-    font-size: 2em;
+    font-size: 1.9em;
+}
+form {
+    margin: .3em 0;
 }
 
 li {
     position: relative;
-    padding: .1em 0;
-    margin: .3em 0;
+    padding: 3px 0;
+    margin: 3px 0;
+}
+.shopping-check-list  {
+    -moz-column-count: 2;
+    -moz-column-gap: 10px;
+    -webkit-column-count: 2;
+    -webkit-column-gap: 10px;
+    column-count: 2;
+    column-gap: 10px;
 }
 
-form {
-    margin: .3em 0;
-}
 
 .highlighted {
     background-color: rgba(256,256,256,0.5);
@@ -184,27 +192,23 @@ a.button:hover {
     color: yellow;
 }
 
-/*.is-favorite a.icon-star2 {
-    color: yellow;
-}
-*/
 
+/* tooltip styling. by default the element to be styled is .tooltip  */
+/*  .tooltip {
+    display:none;
+    background:transparent url(../images/black_arrow.png);
+    font-size:12px;
+    height:70px;
+    width:160px;
+    padding:25px;
+    color:#eee;
+  }*/
 
-.shopping-check-list {
-    columns: 2;
-    -webkit-columns: 2;
-    -moz-columns: 2;
+a.tooltip-text {
+    font-size: 13px;
+    /*text-decoration: underline; */
 }
 
-/*.shopping-check-list  {
-    -moz-column-count: 2;
-    -moz-column-gap: 20px;
-    -webkit-column-count: 2;
-    -webkit-column-gap: 20px;
-    column-count: 2;
-    column-gap: 20px;
-}
-*/
 
 
 /* For the GRID SYSTEM */
