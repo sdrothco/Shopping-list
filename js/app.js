@@ -4,7 +4,7 @@ $(document).ready(function() {
 
 	// A favorite list item was checked or unchecked
 	$('.favorites-check-list').on('click', '.checkbox, .item-text', function() {
-		doFavoriteListToggle($(this).closest("li"));
+		$(this).closest("li").toggleClass("checked");
 
 		checkForAllSelectedOrDeselected($('.favorites'));
 	});
@@ -30,32 +30,12 @@ $(document).ready(function() {
 	.on('click', '.icon-star2', function () {
 
 		var $parentLi = $(this).closest("li");
-
-		// do unfavorite
-		if ($parentLi.hasClass('is-favorite')) {
-			var favoriteTextStr = $parentLi.find(".item-text").text();
-			//console.log('doing unfavorite, removing >' +favoriteTextStr+ '<');
-			var theFav = $('.favorites-check-list li.checked .item-text').filter( function (index) {
-						//console.log("in filter, text is >" +$(this).text()+ "<");
-						return $(this).text() == favoriteTextStr;
-					});
-			if(theFav.length > 0) {
-				//console.log("found: >" + $.trim(theFav.text())+"<, length = " + theFav.length);
-				//theFav.closest('li').remove();
-				theFav.closest('li').removeClass("checked");
-			}
-			$parentLi.removeClass('is-favorite');
-		}
-		// do favorite
-		else {
-			addNewFavorite($parentLi.find(".item-text").text());
-			$parentLi.addClass('is-favorite');
-		}
+		addNewFavorite($parentLi.find(".item-text").text());
     });
 
 
 	// Do editing and removal 
-	$('.shopping-check-list').on('click', '.icon-pencil', function () {
+	$('.shopping-check-list, .favorites-check-list').on('click', '.icon-pencil', function () {
 		console.log("editing item");
 
 		var $editShowing = $('.edit-item:visible');
@@ -81,35 +61,6 @@ $(document).ready(function() {
          }
     });
 
-	$('.favorites-check-list').on('click', '.icon-pencil', function () {
-		console.log("editing fav");
-
-		var $editShowing = $('.edit-item:visible');
-		var $newEditItem = $(this).closest("li").find(".edit-item");
-
-		// if there's already an edit box open, close it
-		if($editShowing.length > 0 || $editShowing.is($newEditItem) ) {
-			console.log("closing already open edit box - reset to >" + $editShowing.next('.item-text').text());
-
-			$editShowing.toggle().next('.item-text').toggle();
-			$editShowing.val($editShowing.next('.item-text').text());
-		}
-		else {
-			$newEditItem.toggle().focus().next('.item-text').toggle();
-		}
-    })
-    .on('click', '.icon-remove', function () {
-		var $liToRemove = $(this).closest("li");
-		findAndUnfavoriteShoppingListItem($liToRemove);
-		$liToRemove.remove();
-    })
-    .on('keyup', '.edit-item', function(event) {
-        if (event.keyCode == 13) {
-			editItem($(this));
-		}
- 
-    });
-
     
     // FORM CONTROLS
     $('#add-item-form').on('click', '.add-favorite-button', function() {
@@ -118,7 +69,8 @@ $(document).ready(function() {
 	$('#add-item').on('keyup', function(event) {
         if (event.keyCode == 13) {
 			var isFavorite = $('.add-favorite-button').hasClass('selected');
-            addShoppingListItem($(this).val(), isFavorite);
+            addShoppingListItem($(this).val());
+			// if the favorite button is pressed down, add this item as a favorite too.
             if (isFavorite) {
 				addNewFavorite($(this).val());
 			}
@@ -129,7 +81,8 @@ $(document).ready(function() {
 		var $addItemTextField = $('#add-item');
         var isFavorite = $('.add-favorite-button').hasClass('selected');
 
-        addShoppingListItem($addItemTextField.val(), isFavorite);
+        addShoppingListItem($addItemTextField.val());
+        // if the favorite button is pressed down, add this item as a favorite too.
         if (isFavorite) {
 			addNewFavorite($addItemTextField.val());
 		}
@@ -140,54 +93,60 @@ $(document).ready(function() {
 	// Provides behavior for both select all buttons
     $('.select-all-button').on('click', function() {
 		var $parentSection = $(this).closest("section");
-		var isFavoritesButton = $parentSection.hasClass("favorites");
-		var theLis = $parentSection.find("li:not(.checked)");
 
+		// find all the list items that are unchecked
+		var theLis = $parentSection.find("li:not(.checked)");
 		if( theLis.length > 0 ) {
-			//theLis.addClass("checked");
 			$(this).hide();
 			$parentSection.find('.deselect-all-button').show();
-			if (isFavoritesButton) {
-				//theLis.find('.checkbox').click();
-				theLis.each(function() {
-					console.log("Select all--iterating over lis:" + $(this).find('.item-text').text() );
-					doFavoriteListToggle($(this));
-				});
-			}
-			else theLis.addClass("checked");
+
+			theLis.addClass("checked");
 		}
 	});
+
 
 	// Provides behavior for both deselect all buttons
 	$('.deselect-all-button').on('click', function() {
 		var $parentSection = $(this).closest("section");
-		var isFavorites = $parentSection.hasClass("favorites");
-		var theLis = $parentSection.find("li.checked");
 
-		//theLis.removeClass("checked");
-		$(this).hide();
-		$parentSection.find('.select-all-button').show();
-		if (isFavorites) {
-				//theLis.find('.checkbox').click();
-				theLis.each(function() {
-					console.log("Deselect all--iterating over lis:" + $(this).find('.item-text').text() );
-					doFavoriteListToggle($(this));
-				});
+		// find all the list items that are checked
+		var theLis = $parentSection.find("li.checked");
+		if( theLis.length > 0 ) {
+			$(this).hide();
+			$parentSection.find('.select-all-button').show();
+	
+			theLis.removeClass("checked");
 		}
-		else theLis.removeClass("checked");
 	});
+
 
 	// Provides behavior for both delete selected buttons
 	$('.delete-selected-button').on('click', function() {
 		console.log('deleting selected');
 		var $parentSection = $(this).closest("section");
 		var $liToRemove = $parentSection.find("li.checked");
-		// if deleted favorites, check for shopping list items that 
-		// shouldn't have a yellow star anymore.
-		if( $parentSection.hasClass('favorites')) {
-			findAndUnfavoriteShoppingListItem($liToRemove);
-		}
+		
 		$liToRemove.remove();
+
+		$parentSection.find('.deselect-all-button').hide();
+		$parentSection.find('.select-all-button').show();
+	});
+
+
+	// Adds the selected favorites to the shopping list.
+	$('.add-to-list-button').on('click', function() {
+		console.log('adding favorites to shopping list');
+		var $parentSection = $(this).closest("section");
+		var $lisToAdd = $parentSection.find("li.checked");
+		
+		$lisToAdd.each( function(index) {
+			var $thisLiToAdd = $(this);
+			var favoriteTextStr = $thisLiToAdd.find('.item-text').text();
+
+			console.log("add-to-list-button: thisLiToAdd.text is >" +favoriteTextStr+ "<");
+			addShoppingListItem(favoriteTextStr);
+			$thisLiToAdd.toggleClass("checked");
+		});
 
 		$parentSection.find('.deselect-all-button').hide();
 		$parentSection.find('.select-all-button').show();
@@ -196,26 +155,10 @@ $(document).ready(function() {
 });
 
 
-function findAndUnfavoriteShoppingListItem($favLi) {
-	console.log("In findAndUnfavoriteShoppingListItem");
-
-	// for each favorite li to be removed...unhighlight the yellow star for the equiv shop list item.
-	$favLi.each( function(index) {
-		var $thisLiToUnhighlight = $(this);
-		console.log("findAndUnfavoriteShoppingListItem: thisLiToUnhighlight.text is >" +$thisLiToUnhighlight.find('.item-text').text()+ "<");
-		var theMatches = $('.shopping-check-list li.is-favorite .item-text').filter( function (index) {
-				console.log("findAndUnfavoriteShoppingListItem: in filter, text is >" +$(this).text()+ "<");
-				return $(this).text() == $thisLiToUnhighlight.find('.item-text').text();
-			});
-		console.log("findAndUnfavoriteShoppingListItem: theMatches.text is >" +theMatches.text()+ "<");
-		theMatches.closest('li').removeClass('is-favorite');
-	});
-}
-
-
-function addShoppingListItem(textFieldVal, isFavorite) {
+// Add a new shopping list item
+function addShoppingListItem(textFieldVal) {
 	textFieldVal = $.trim(textFieldVal);
-	console.log("In Add: trimmed val >" +textFieldVal+ "<, isFavorite=" + isFavorite);
+	console.log("In Add: trimmed val >" +textFieldVal+ "<");
     
     if( textFieldVal !== '' ) {
 	
@@ -229,11 +172,7 @@ function addShoppingListItem(textFieldVal, isFavorite) {
 			return;
 		}
 
-		var isFavClassStr = "";
-		if (isFavorite) {
-			isFavClassStr = " class='is-favorite'";
-		}
-		var newItem = $('<li' +isFavClassStr+ '><a data-icon="&#xe60b;" class="icon-checkbox-unchecked checkbox" href="#"></a>'
+		var newItem = $('<li><a data-icon="&#xe60b;" class="icon-checkbox-unchecked checkbox" href="#"></a>'
 			+'<a data-icon="&#xe60b;" class="icon-checkbox-checked checkbox" href="#"></a>'
 			+' <input class="edit-item" type="text" value="'+textFieldVal+'"><span class="item-text">'
 			+textFieldVal+ '</span><span class="item-controls">'
@@ -246,39 +185,8 @@ function addShoppingListItem(textFieldVal, isFavorite) {
 	}
 }
 
-function editItem ($textField) {
-	var	textFieldVal = $.trim($textField.val());
-	var $liToEdit = $textField.closest("li");
-	var currentItemText = $liToEdit.find('.item-text').text();
 
-	console.log("Edit: textFieldVal >" +textFieldVal + "<, currentItemText >" +currentItemText+ "<");
-
-	if( textFieldVal !== '' && textFieldVal !== currentItemText ) {
-
-		if( $liToEdit.closest("section").hasClass('favorites')) {
-			findAndUnfavoriteShoppingListItem($liToEdit);
-			$liToEdit.removeClass('checked');
-		}
-		else {
-		//if( $liToEdit.closest("section").hasClass('favorites')) {
-			console.log('Unchecking favorite: ' + $liToEdit.find('.item-text').text() );
-			var theMatches = $('.favorites-check-list li .item-text').filter( function (index) {
-				console.log("Unchecking favorite filter, text is >" +$(this).text()+ "<");
-				return $(this).text() == textFieldVal;
-			});
-			if( theMatches.length > 0 ) {
-				theMatches.closest('li').removeClass('checked');
-				//return;
-			}
-		}
-		// if editing the sl uncheck the favorite 
-
-
-		$liToEdit.find('.item-text').text(textFieldVal);
-		$liToEdit.find('.icon-pencil').click();
-	}
-}
-
+// Add a new item to the favorites list.
 function addNewFavorite(favoriteStr) {
 
 	favoriteStr = $.trim(favoriteStr);
@@ -289,12 +197,11 @@ function addNewFavorite(favoriteStr) {
 				return $(this).text() == favoriteStr;
 			});
 		if( theMatches.length > 0 ) {
-			theMatches.closest('li').addClass('checked');
-			//alert("Error: That item already exists in the favorites list.");
+			alert("Error: That item already exists in the favorites list.");
 			return;
 		}
 
-		var newItem = $('<li class="checked"><a data-icon="&#xe60b;" class="icon-checkbox-unchecked checkbox" href="#"></a>'
+		var newItem = $('<li><a data-icon="&#xe60b;" class="icon-checkbox-unchecked checkbox" href="#"></a>'
 			+'<a data-icon="&#xe60b;" class="icon-checkbox-checked checkbox" href="#"></a>'
 			+' <input class="edit-item" type="text" value="'+favoriteStr+'"><span class="item-text">'
 			+favoriteStr+ '</span><span class="fav-controls">'
@@ -305,26 +212,25 @@ function addNewFavorite(favoriteStr) {
 
 }
 
-// If they check a favorite, it should be added to the shopping list.
-// It they uncheck a favorite, it should be removed from the shopping list.
-// $parentLi is the closest parent li to the triggering control
-function doFavoriteListToggle($parentLi) {
-	var favoriteTextStr = $parentLi.find('.item-text').text();
 
-	$parentLi.toggleClass("checked");
+// Edit a list item, either shopping list or favorite.
+function editItem ($textField) {
+	var	textFieldVal = $.trim($textField.val());
 
-	if ($parentLi.hasClass("checked")) {
-		addShoppingListItem(favoriteTextStr, true);
+	if( textFieldVal !== '' ) {
+	var $liToEdit = $textField.closest("li");
+	var currentItemText = $liToEdit.find('.item-text').text();
+
+		console.log("Edit: textFieldVal >" +textFieldVal + "<, currentItemText >" +currentItemText+ "<");
+
+		if( textFieldVal !== '' && textFieldVal !== currentItemText ) {
+
+			$liToEdit.find('.item-text').text(textFieldVal);
+			$liToEdit.find('.icon-pencil').click();
+		}
 	}
 	else {
-		var theFav = $('.shopping-check-list li.is-favorite .item-text').filter( function (index) {
-				console.log("in filter, text is >" +$(this).text()+ "<");
-				return $(this).text() == favoriteTextStr;
-		});
-		if(theFav.length > 0) {
-			console.log("found: >" + $.trim(theFav.text())+"<, length = " + theFav.length);
-			theFav.closest('li').remove();
-		}
+		alert("Please enter a new value.");
 	}
 }
 
@@ -346,5 +252,4 @@ function checkForAllSelectedOrDeselected($parentSection) {
 		$parentSection.find('.deselect-all-button').hide();
 		$parentSection.find('.select-all-button').show();
 	}
-
 }
