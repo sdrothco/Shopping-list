@@ -14,10 +14,20 @@ body {
 header, footer {
     width: 960px;
     padding: .5em;
-    margin-top: 2em;
-    margin-bottom: 2em;
+    margin-bottom: 1em;
+    /*background: #9FF781;*/
     background: #9FF781;
+    background: -webkit-linear-gradient(left, #9FF781, #31B404);
+    background: -moz-linear-gradient(left, #9FF781, #31B404);
+    background: -o-linear-gradient(left, #9FF781, #31B404);
+    background: -ms-linear-gradient(left, #9FF781, #31B404);
+    background: linear-gradient(left, #9FF781, #31B404);
 }
+footer {
+    margin-top: 1.5em;
+    height: 2.5em;
+}
+
 h1 {
     font-size: 3.5em;
     font-family: 'Wendy One', Helvetica, sans-serif;
@@ -25,9 +35,7 @@ h1 {
 h2 {
     font-size: 1.9em;
 }
-form {
-    margin: .3em 0;
-}
+
 
 li {
     position: relative;
@@ -44,10 +52,26 @@ li {
 }
 
 
+.load-msg {
+    font-weight: bold;
+    font-size: 1em;
+}
+.default-load-msg, .saved-data-load-msg {
+    display: none;
+}
+
+#author {
+    text-align: center;
+    margin: 0 auto;
+}
+
 .highlighted {
     background-color: rgba(256,256,256,0.5);
 }
 
+#add-item-form {
+    margin: .3em 0;
+}
 
 
 #add-item {
@@ -168,6 +192,16 @@ a.button:hover {
     /*margin-left: .5em;*/
 }
 
+.reset-saved-data-button {
+    /*float:right;*/
+    /*margin-top: 0;
+    margin: 0 right;*/
+    /*text-align: right;*/
+    position: absolute;
+    right: 0;
+    bottom: -15px;
+}
+
 .add-button, .add-favorite-button {
     margin-left: .2em;
     padding: 5px;
@@ -222,7 +256,7 @@ a.tooltip-text {
     position: relative;
     float: left;
     margin-right: 1%;
-    padding: 8px;
+    padding: 4px;
 }
 
 .last {

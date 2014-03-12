@@ -28,11 +28,11 @@
 
 <div class="container">
 	<section class="shopping-list column column-66 tall">
-		<form id="add-item-form" name="add-item-form">
+		<div id="add-item-form">
 			<input type="text" placeholder="Add item" id="add-item" maxlength="30"/>
 			<a href="#" data-icon="&#xe606;" class="add-favorite-button button icon-star2"></a>
 			<a href="#" data-icon="&#xe609;" class="icon-plus add-button button"></a>
-		</form>
+		</div>
 
 		<ul class="shopping-check-list">
 			<li class="checked">
@@ -121,8 +121,13 @@
 		footer goes here
 	</section>
 </div> -->
-<footer>
-	Created by Dawn Roth.
+
+<footer class="container">
+	<div class="column column-33 load-msg">
+		<span class="default-load-msg">Default list items loaded</span><span class="saved-data-load-msg">List items loaded from saved data</span></div>
+	<div class="column column-33" id="author">By Dawn Roth</div>
+	<div class="column column-33 last"><a class="reset-saved-data-button button" href="#">Reset Saved Data</a></div>
+
 </footer>
 	
 </body>
