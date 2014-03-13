@@ -178,7 +178,7 @@ $(document).ready(function() {
 	// Delete any saved data from local storage.
 	$('.reset-saved-data-button').on('click', function() {
 		console.log('Resetting saved data');
-		localStorage.clear();
+		window.localStorage.clear();
 		location.reload();
 	});
 });
@@ -186,37 +186,46 @@ $(document).ready(function() {
 // Looks to see if there is any data in local storage, and if there is...
 // it loads it into the DOM.
 function loadFromLocalStorage() {
-	var favList = JSON.parse(localStorage.getItem('favoritesCheckList')),
-		shopList = JSON.parse(localStorage.getItem('shoppingCheckList')),
-		loadedData = false;
 
-	if (favList && favList.length > 0) {
-		console.log("Found favorites list: Loading now.");
-		$('.favorites-check-list li').remove();
-		var favLength = favList.length;
-		for (var i = 0; i < favLength; i++) {
-			console.log("Loading favorite: >" + favList[i] + "<");
-			addNewFavorite(favList[i]);
+	var loadedData = false;
+	if (typeof(window.localStorage)!=="undefined") {
+
+		var favList = JSON.parse(window.localStorage.getItem('favoritesCheckList')),
+			shopList = JSON.parse(window.localStorage.getItem('shoppingCheckList'));
+
+		if (favList && favList.length > 0) {
+			console.log("Found favorites list: Loading now.");
+			$('.favorites-check-list li').remove();
+			var favLength = favList.length;
+			for (var i = 0; i < favLength; i++) {
+				console.log("Loading favorite: >" + favList[i] + "<");
+				addNewFavorite(favList[i]);
+			}
+			loadedData = true;
 		}
-		loadedData = true;
+		else {
+			console.log("Did NOT find favorites list: Use file data.");
+		}
+
+		if (shopList && shopList.length > 0) {
+			console.log("Found shopping list: Loading now.");
+			$('.shopping-check-list li').remove();
+			var shopLength = shopList.length;
+			for (var j = 0; j < shopLength; j++) {
+				console.log("Loading shop list item: >" + shopList[j] + "<");
+				addShoppingListItem(shopList[j]);
+			}
+			loadedData = true;
+		}
+		else {
+			console.log("Did NOT find shopping list: Use file data.");
+		}
 	}
 	else {
-		console.log("Did NOT find favorites list: Use file data.");
+		console.log("loadFromLocalStorage: Local storage not available.");
+		$('.reset-saved-data-button').hide();
 	}
 
-	if (shopList && shopList.length > 0) {
-		console.log("Found shopping list: Loading now.");
-		$('.shopping-check-list li').remove();
-		var shopLength = shopList.length;
-		for (var j = 0; j < shopLength; j++) {
-			console.log("Loading shop list item: >" + shopList[j] + "<");
-			addShoppingListItem(shopList[j]);
-		}
-		loadedData = true;
-	}
-	else {
-		console.log("Did NOT find shopping list: Use file data.");
-	}
 	if (loadedData) {
 		$('.saved-data-load-msg').show();
 		$('.default-load-msg').hide();
@@ -231,17 +240,24 @@ function loadFromLocalStorage() {
 // If the user added, deleted, or modified any list items, write the
 // data to local storage.
 function writeToLocalStorage($parentUL) {
-	//console.log("writeToLocalStorage: parentUL class =>" +$parentUL.attr('class')+ "<");
-	var fav = $parentUL.find('li .item-text'),
-		arr = fav.map(function () { return $(this).text(); }).get();
 
-	if ($parentUL.hasClass('favorites-check-list')) {
-		console.log("Saving Favorites list to local storage.");
-		localStorage.setItem('favoritesCheckList', JSON.stringify(arr));
+	if (typeof(window.localStorage)!=="undefined") {
+
+		//console.log("writeToLocalStorage: parentUL class =>" +$parentUL.attr('class')+ "<");
+		var fav = $parentUL.find('li .item-text'),
+			arr = fav.map(function () { return $(this).text(); }).get();
+
+		if ($parentUL.hasClass('favorites-check-list')) {
+			console.log("Saving Favorites list to local storage.");
+			window.localStorage.setItem('favoritesCheckList', JSON.stringify(arr));
+		}
+		else {
+			console.log("Saving shopping list to local storage.");
+			window.localStorage.setItem('shoppingCheckList', JSON.stringify(arr));
+		}
 	}
 	else {
-		console.log("Saving shopping list to local storage.");
-		localStorage.setItem('shoppingCheckList', JSON.stringify(arr));
+		console.log("writeToLocalStorage: Local storage not available.");
 	}
 	$('.saved-data-load-msg').hide();
 	$('.default-load-msg').hide();

@@ -17,12 +17,12 @@
 	</h1>
 </header>
 
-<div class="container">
+<div class="container non-hidden-overflow">
 <h2 class="column column-66">
 	<span data-icon="&#xe601;" class="icon-cart"></span> Shopping List
 </h2>
 <h2 class="column column-33 last">
-	<span data-icon="&#xe606;" class="icon-star2 selected"></span> My Favorites <a href="" class="tooltip-text" title="A place to keep items you shop for regularly.">(What's This?)</a>
+	<span data-icon="&#xe606;" class="icon-star2 selected"></span> My Favorites <a href="#" class="tooltip-top tooltip-text" data-tooltip="A place to keep items you shop for regularly.">(What's This?)</a>
 </h2>
 </div>
 
@@ -34,7 +34,7 @@
 			<a href="#" data-icon="&#xe609;" class="icon-plus add-button button"></a>
 		</div>
 
-		<ul class="shopping-check-list">
+		<ul class="shopping-check-list" id="double">
 			<li class="checked">
 				<a data-icon="&#xe60b;" class="icon-checkbox-unchecked checkbox" href="#"></a>
 				<a data-icon="&#xe60b;" class="icon-checkbox-checked checkbox" href="#"></a>
@@ -73,7 +73,7 @@
 
 
 	<section class="favorites column column-33 tall last highlighted">
-		<ul class="favorites-check-list">
+		<ul class="favorites-check-list" id="single">
 			<li>
 				<a data-icon="&#xe60b;" class="icon-checkbox-unchecked checkbox" href="#"></a>
 				<a data-icon="&#xe60b;" class="icon-checkbox-checked checkbox" href="#"></a>
