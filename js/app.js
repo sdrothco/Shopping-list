@@ -78,7 +78,7 @@ $(document).ready(function() {
 		$(this).toggleClass('selected');
 		event.preventDefault();
     });
-	$('#add-item').on('keyup', function(event) {
+	$('#add-item-form').on('keypress', '#add-item', function(event) {
         if (event.keyCode == 13) {
 			var isFavorite = $('.add-favorite-button').hasClass('selected');
             addShoppingListItem($(this).val());
